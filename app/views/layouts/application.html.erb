@@ -7,7 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= react_component('NavigationBar',
+                    {websiteName: 'XMFun',
+                     rootURL: root_url,
+                     signinPath: signin_path,
+                     signoutPath: signout_path,
+                     userId: session[:user_id] || -1},
+                    {prerender: true}) %>
 <%= yield %>
 
 </body>
