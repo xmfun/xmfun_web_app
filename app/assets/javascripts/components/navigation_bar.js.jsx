@@ -1,4 +1,20 @@
 var NavigationBar = React.createClass({
+  propTypes: {
+    websiteName: React.PropTypes.string,
+    rootURL: React.PropTypes.string,
+    signinPath: React.PropTypes.string,
+    signoutPath: React.PropTypes.string,
+    userId: React.PropTypes.number
+  },
+  getDefaultProps: function() {
+    return {
+      websiteName: 'XMFun',
+      rootURL: '',
+      signinPath: '',
+      signoutPath: '',
+      userId: -1
+    };
+  },
   handleLogIn: function () {
     if (this.props.userId > 0) {
       return (
