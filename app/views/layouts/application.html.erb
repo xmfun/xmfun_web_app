@@ -7,11 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= current = current_user(session[:user_id]) %>
 <%= react_component('NavigationBar',
-                    {rootURL: root_url,
+                    {rootUrl: root_url,
                      signinPath: signin_path,
                      signoutPath: signout_path,
-                     userId: session[:user_id] || -1},
+                     userId: session[:user_id] || -1,
+                     userImgUrl: current ? current.img_url : ''},
                     {prerender: true}) %>
 <br/>
 <br/>

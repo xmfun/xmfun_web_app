@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
       if auth['info']
         user.name = auth['info']['name'] || ""
         user.email = auth['info']['email'] || ""
+        user.img_url = auth['info']['image'] || ""
       end
     end
   end

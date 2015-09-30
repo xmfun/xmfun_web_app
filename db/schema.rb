@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929003039) do
+ActiveRecord::Schema.define(version: 20150930004300) do
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",   limit: 255
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150929003039) do
     t.string   "email",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "img_url",    limit: 255
   end
 
 end
