@@ -60,4 +60,6 @@ Rails.application.routes.draw do
   get '/signout' => 'sessions#destroy', :as => :signout
 
   get '/signin' => 'sessions#new', :as => :signin
+
+  post '/search' => 'home#search', :as => :search
 end
