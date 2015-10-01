@@ -5,5 +5,4 @@
   <% end %>
 </ul> -->
 
-<%= react_component('IndexBody') %>
-<p><%= @comparison %></p>
+<%= react_component('IndexBody', {searchUrl: search_url, authToken: form_authenticity_token()}) %>
