@@ -25,6 +25,13 @@ var IndexBody = React.createClass({
       $(header).hide();
       searchBar.style.marginTop = "30px";
     }
+
+    searchBar.style.marginBottom = "30px";
+  },
+  showSrchResList: function () {
+    if (!this.props.headerNeeded) {
+      return <SrchResList ref="srchResList"/>
+    }
   },
   componentDidMount: function() {
     this.setHeaderStyle();
@@ -42,6 +49,7 @@ var IndexBody = React.createClass({
                         searchInput={this.props.searchInput}/>
             </div>
           </div>
+          {this.showSrchResList()}
         </div>
       </div>
     );
@@ -90,6 +98,35 @@ var SearchBar = React.createClass({
           </div>
         </div>
       </form>
+    );
+  }
+});
+
+var SrchResList = React.createClass({
+  propTypes: {
+  },
+  getDefaultProps: function() {
+    return {};
+  },
+  render: function() {
+    return (
+      <div ref="results" className="panel-group">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h4 className="panel-title">
+              <a ref="header" data-toggle="collapse" href="#collapse1">Collapse/Expand Results</a>
+            </h4>
+          </div>
+          <div id="collapse1" className="panel-collapse collapse in">
+            <ul className="list-group">
+              <li className="list-group-item">One</li>
+              <li className="list-group-item">Two</li>
+              <li className="list-group-item">Three</li>
+            </ul>
+            <div className="panel-footer">Footer</div>
+          </div>
+        </div>
+      </div>
     );
   }
 });
