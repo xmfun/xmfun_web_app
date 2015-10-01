@@ -2,19 +2,32 @@ var IndexBody = React.createClass({
   propTypes: {
     searchUrl: React.PropTypes.string,
     authToken: React.PropTypes.string,
-    searchInput: React.PropTypes.string
+    searchInput: React.PropTypes.string,
+    headerNeeded: React.PropTypes.bool
   },
   getDefaultProps: function() {
     return {
       authToken: '',
       searchUrl: '',
-      searchInput: ''
+      searchInput: '',
+      headerNeeded: true
     };
   },
+  setHeaderStyle: function () {
+    var header = this.refs.mainHeader.getDOMNode();
+    var searchBar = this.refs.searchBar.getDOMNode();
+
+    if (this.props.headerNeeded) {
+      header.style.textAlign = "center";
+      header.style.marginTop = "150px";
+      header.style.marginBottom = "30px";
+    } else {
+      $(header).hide();
+      searchBar.style.marginTop = "30px";
+    }
+  },
   componentDidMount: function() {
-    this.refs.MainHeader.getDOMNode().style.textAlign = "center";
-    this.refs.MainHeader.getDOMNode().style.marginTop = "150px";
-    this.refs.MainHeader.getDOMNode().style.marginBottom = "30px";
+    this.setHeaderStyle();
   },
   render: function () {
     return (
@@ -22,8 +35,8 @@ var IndexBody = React.createClass({
         <div className="container container-table">
           <div className="row vertical-center-row">
             <div className="col-md-4 col-md-offset-4">
-              <h1 ref="MainHeader">XMFun</h1>
-              <SearchBar ref="SearchBar"
+              <h1 ref="mainHeader">XMFun</h1>
+              <SearchBar ref="searchBar"
                         searchUrl={this.props.searchUrl}
                         authToken={this.props.authToken}
                         searchInput={this.props.searchInput}/>
