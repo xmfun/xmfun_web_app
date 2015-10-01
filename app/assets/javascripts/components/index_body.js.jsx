@@ -26,7 +26,7 @@ var IndexBody = React.createClass({
       searchBar.style.marginTop = "30px";
     }
 
-    searchBar.style.marginBottom = "30px";
+    searchBar.style.marginBottom = "50px";
   },
   showSrchResList: function () {
     if (!this.props.headerNeeded) {
@@ -49,8 +49,8 @@ var IndexBody = React.createClass({
                         searchInput={this.props.searchInput}/>
             </div>
           </div>
-          {this.showSrchResList()}
         </div>
+        {this.showSrchResList()}
       </div>
     );
   }
@@ -110,20 +110,68 @@ var SrchResList = React.createClass({
   },
   render: function() {
     return (
-      <div ref="results" className="panel-group">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <h4 className="panel-title">
-              <a ref="header" data-toggle="collapse" href="#collapse1">Collapse/Expand Results</a>
-            </h4>
-          </div>
-          <div id="collapse1" className="panel-collapse collapse in">
-            <ul className="list-group">
-              <li className="list-group-item">One</li>
-              <li className="list-group-item">Two</li>
-              <li className="list-group-item">Three</li>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4 col-md-offset-2">
+            <ul className="pagination">
+              <li><a href="#">1</a></li>
+              <li className="active"><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
             </ul>
-            <div className="panel-footer">Footer</div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-8 col-md-offset-2">
+            <div ref="results" className="panel-group">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h4 className="panel-title">
+                    Search Results
+                  </h4>
+                </div>
+                <div className="panel-body">
+                  <ul className="list-group">
+                    <li className="list-group-item">One</li>
+                    <li className="list-group-item">Two</li>
+                    <li className="list-group-item">Three</li>
+                    <li className="list-group-item">1</li>
+                    <li className="list-group-item">2</li>
+                    <li className="list-group-item">3</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                    <li className="list-group-item">4</li>
+                  </ul>
+                  <div className="panel-footer">Footer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-4 col-md-offset-2">
+            <ul className="pagination">
+              <li><a href="#">1</a></li>
+              <li className="active"><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+            </ul>
           </div>
         </div>
       </div>
