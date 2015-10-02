@@ -3,6 +3,7 @@ var IndexBody = React.createClass({
     searchUrl: React.PropTypes.string,
     authToken: React.PropTypes.string,
     searchInput: React.PropTypes.string,
+    searchResult: React.PropTypes.array,
     headerNeeded: React.PropTypes.bool
   },
   getDefaultProps: function() {
@@ -10,6 +11,7 @@ var IndexBody = React.createClass({
       authToken: '',
       searchUrl: '',
       searchInput: '',
+      searchResult: [],
       headerNeeded: true
     };
   },
@@ -30,7 +32,7 @@ var IndexBody = React.createClass({
   },
   showSrchResList: function () {
     if (!this.props.headerNeeded) {
-      return <SrchResList ref="srchResList"/>
+      return <SrchResList ref="srchResList" searchResult={this.props.searchResult}/>
     }
   },
   componentDidMount: function() {
@@ -104,9 +106,63 @@ var SearchBar = React.createClass({
 
 var SrchResList = React.createClass({
   propTypes: {
+    searchResult: React.PropTypes.array
   },
   getDefaultProps: function() {
-    return {};
+    return {
+      searchResult: []
+    };
+  },
+  getInitialState: function() {
+    return {
+      pageSize: 20,
+      pages: 1,
+      results: [],
+      currentPage: 1
+    };
+  },
+  handlePagination: function (event) {
+    var nextPage = event.target.name;
+    if (nextPage !== this.state.currentPage) {
+      $(".pagination-"+this.state.currentPage).removeClass("active");
+      $(".pagination-"+nextPage).addClass("active");
+      this.setState({
+        currentPage: nextPage
+      });
+    }
+  },
+  paginationItems: function () {
+    var items = [];
+    if (this.state.pages > 1) {
+      for (var i = 1; i <= this.state.pages; i++) {
+        items.push(<li key={i} className={"pagination-"+i}><a name={i} onClick={this.handlePagination}>{i}</a></li>);
+      }
+    }
+    return items;
+  },
+  firstElemNum: function () {
+    return this.state.pageSize * (this.state.currentPage - 1) + 1;
+  },
+  lastElemNum: function () {
+    return Math.min(this.state.pageSize * this.state.currentPage, this.state.results.length);
+  },
+  footerMessage: function () {
+    return this.firstElemNum() + "-" + this.lastElemNum() + " out of total " + this.state.results.length + " items";
+  },
+  eachItem: function (item, i) {
+    return <li key={i} className="list-group-item">{item}</li>
+  },
+  componentWillMount: function() {
+    var pageNum = Math.ceil(this.props.searchResult.length / this.state.pageSize);
+    this.setState({
+      results: this.props.searchResult,
+      pages: pageNum
+    });
+  },
+  componentDidMount: function() {
+    if (this.state.pages > 1) {
+      $(".pagination-1").addClass("active");
+    }
   },
   render: function() {
     return (
@@ -114,11 +170,7 @@ var SrchResList = React.createClass({
         <div className="row">
           <div className="col-md-4 col-md-offset-2">
             <ul className="pagination">
-              <li><a href="#">1</a></li>
-              <li className="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              {this.paginationItems()}
             </ul>
           </div>
         </div>
@@ -133,31 +185,9 @@ var SrchResList = React.createClass({
                 </div>
                 <div className="panel-body">
                   <ul className="list-group">
-                    <li className="list-group-item">One</li>
-                    <li className="list-group-item">Two</li>
-                    <li className="list-group-item">Three</li>
-                    <li className="list-group-item">1</li>
-                    <li className="list-group-item">2</li>
-                    <li className="list-group-item">3</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
-                    <li className="list-group-item">4</li>
+                    {this.state.results.slice(this.firstElemNum() - 1, this.lastElemNum()).map(this.eachItem)}
                   </ul>
-                  <div className="panel-footer">Footer</div>
+                  <div className="panel-footer">{this.footerMessage()}</div>
                 </div>
               </div>
             </div>
@@ -166,11 +196,7 @@ var SrchResList = React.createClass({
         <div className="row">
           <div className="col-md-4 col-md-offset-2">
             <ul className="pagination">
-              <li><a href="#">1</a></li>
-              <li className="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              {this.paginationItems()}
             </ul>
           </div>
         </div>

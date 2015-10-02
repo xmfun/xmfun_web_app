@@ -8,5 +8,6 @@
 <%= react_component('IndexBody', {searchUrl: search_url,
                                   authToken: form_authenticity_token(),
                                   searchInput: @search_input || '',
+                                  searchResult: @search_result || [],
                                   headerNeeded: header_needed},
                                  {prerender: true}) %>
