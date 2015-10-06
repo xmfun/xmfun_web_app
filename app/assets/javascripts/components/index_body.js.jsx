@@ -88,8 +88,7 @@ var SearchBar = React.createClass({
   },
   render: function () {
     return (
-      <form className="form-search" action={this.props.searchUrl} method='post' onSubmit={this.handleSubmit}>
-        <input type="hidden" value={this.props.authToken} name="authenticity_token"/>
+      <form className="form-search" action={this.props.searchUrl} method='get' onSubmit={this.handleSubmit}>
         <div className="input-group add-on">
           <input ref="srchInput" type="search" className="form-control" placeholder="Search for Xiami music"
                 name="srch_term" onChange={this.handleSearchInput}/>
