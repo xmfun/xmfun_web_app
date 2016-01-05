@@ -61,5 +61,5 @@ Rails.application.routes.draw do
 
   get '/signin' => 'sessions#new', :as => :signin
 
-  post '/search' => 'home#search', :as => :search
+  get '/search' => 'home#search', :as => :search
 end
